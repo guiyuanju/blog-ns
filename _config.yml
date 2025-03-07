@@ -1,1 +1,15 @@
 theme: minima
+title: June's
+description: Software, tech and thoughts💡
+github_username: guiyuanju
+github_repo: "blog-ns"
+
+minima:
+  social_links:
+    twitter: lasvice
+    github: guiyuanju
+
+use_math: true
+show_description: true
+show_image: true
+show_tags: true
