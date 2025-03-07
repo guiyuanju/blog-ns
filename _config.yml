@@ -6,7 +6,7 @@ github_repo: "blog-ns"
 
 minima:
   social_links:
-    twitter: lasvice
+    x: lasvice
     github: guiyuanju
 
 use_math: true
