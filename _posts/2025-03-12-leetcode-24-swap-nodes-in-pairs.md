@@ -41,6 +41,7 @@ func swapPairs(head *ListNode) *ListNode {
 
 Recursive solution:
 ```go
+func swapPairs(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
@@ -50,6 +51,7 @@ Recursive solution:
 	head.Next.Next = head
 	head.Next = swapPairs(next)
 	return dump
+}
 ```
 
 Im my opinion, the recursive solution is much more easily to come up with and understand.
