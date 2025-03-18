@@ -204,11 +204,11 @@ I define an operation that involves inserting a certain number `⁠n` of element
 
 The results are as follows, where the x-axis represents the number of elements ⁠n (from 10 to 1500), and the y-axis represents the average time taken for operations at the current scale. It can be observed that the average time fluctuates in a sawtooth pattern as the scale increases. Each rising segment indicates that, under fixed storage size, the operation times increase as the number of elements stored in the Hash Table increases (indicating more collisions). When the threshold is reached, the space is expanded, and the average operation time drops accordingly.
 
-![average op time](/assets/images/244E2B0BC39A82FB57745536193C9312.png)
+![average op time]({{site.baseurl}}/assets/images/244E2B0BC39A82FB57745536193C9312.png)
 
 Additionally, I calculated the amortized operation time. Similarly, the x-axis represents the input size, but the y-axis shows the average time taken for all operations up to that point. It can be seen that the amortized time complexity of the Hash Table indeed approaches O(1).
 
-![amortized op time](/assets/images/8AF2B7052E9543A14EF8DB5B4DBAC41F.png)
+![amortized op time]({{site.baseurl}}/assets/images/8AF2B7052E9543A14EF8DB5B4DBAC41F.png)
 
 Through this implementation, I gained insights into some unique details of Hash Tables, such as the peculiarities of deletion in linear probing, the pros and cons of different collision resolution algorithms, and the actual time complexity of Hash Tables.
 
@@ -419,11 +419,11 @@ impl Table {
 
 可以得到以下结果，其中 x 轴表示元素规模 ⁠n（⁠n = 10..1500），y 轴表示当前规模下的平均操作耗时。可以看到，平均耗时随着规模呈锯齿状波动，每一个上升区间代表在数据空间大小固定的情况下，操作随着 Hash Table 已存储元素的数量增加而增加（也就是说，碰撞次数越来越多）。当达到阈值时，空间被扩展，操作的平均耗时随之回落。
 
-![average op time](/assets/images/244E2B0BC39A82FB57745536193C9312.png)
+![average op time]({{site.baseurl}}/assets/images/244E2B0BC39A82FB57745536193C9312.png)
 
 另外，我还计算了摊余（amortized）操作时间。同样，x 轴表示输入规模，不同的是，y 轴表示目前为止所有规模的操作平均耗时。可以看到 Hash Table 的摊余时间复杂度确实接近 O(1)。
 
-![amortized op time](/assets/images/8AF2B7052E9543A14EF8DB5B4DBAC41F.png)
+![amortized op time]({{site.baseurl}}/assets/images/8AF2B7052E9543A14EF8DB5B4DBAC41F.png)
 
 通过这次的实现，我了解了 Hash Table 中一些特别的细节，比如线性探测下删除的特殊性、不同碰撞解决算法的优缺点，以及 Hash Table 的实际时间复杂度。
 
