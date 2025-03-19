@@ -3,6 +3,8 @@ title: "Implementing a HashTable in Rust"
 date: 2025-03-18
 ---
 
+[Link for Code](https://github.com/guiyuanju/hash_table_in_rust)
+
 Recently, I wanted to revisit Rust, and while following along with the book _Crafting Interpreters_, I came across the chapter on implementing a Hash Table. I discovered many interesting details about Hash Table implementations, which inspired me to write this blog post. I will implement a Hash Table using Rust and conduct some possibly non-standard benchmarks.
 
 A Hash Table typically consists of two main components:
@@ -430,4 +432,3 @@ impl Table {
 关于 Hash Table，还有许多可以讨论的地方，比如比较不同哈希算法的性能、实际比较不同碰撞算法的性能差异，以及线性探测下墓碑机制之外的算法性能，这些都留待未来探索。
 
 希望这篇博客能够对你有所帮助！
-
