@@ -1,5 +1,5 @@
 ---
-title: "Leetcode 24: Swap Nodes in Pairs"
+title: "Leetcode 24: Swap Nodes in Pairs -- Iterative vs Recursive"
 date: 2025-03-12
 tags:
   - leetcode
