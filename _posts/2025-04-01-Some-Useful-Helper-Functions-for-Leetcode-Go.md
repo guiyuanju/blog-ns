@@ -76,6 +76,10 @@ func makeBinaryTree(nodes []any) *TreeNode {
 		}
 		queue = append(queue, cur)
 
+		for queue[0] == nil {
+			queue = queue[1:]
+		}
+
 		if i == 0 {
 			root = cur
 		} else if i%2 != 0 {
