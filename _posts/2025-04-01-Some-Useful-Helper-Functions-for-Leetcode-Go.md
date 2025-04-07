@@ -94,22 +94,31 @@ func makeBinaryTree(nodes []any) *TreeNode {
 
 // print a bianry tree
 func printBinaryTree(root *TreeNode) {
+	flat := []*TreeNode{}
 	queue := []*TreeNode{root}
-	fmt.Print("[")
 	for len(queue) > 0 {
 		cur := queue[0]
 		queue = queue[1:]
-		fmt.Print(cur.Val)
-		if cur.Left != nil {
+		flat = append(flat, cur)
+		if cur != nil {
 			queue = append(queue, cur.Left)
-		}
-		if cur.Right != nil {
 			queue = append(queue, cur.Right)
 		}
-		if len(queue) > 0 {
-			fmt.Print(" ")
+	}
+	for i := len(flat) - 1; i >= 0 && flat[i] == nil; i-- {
+		flat = flat[:len(flat)-1]
+	}
+	fmt.Print("[")
+	for i, v := range flat {
+		if v != nil {
+			fmt.Print(v.Val)
+		} else {
+			fmt.Print("null")
+		}
+		if i < len(flat)-1 {
+			fmt.Print(", ")
 		}
 	}
-	fmt.Print("]")
+	fmt.Println("]")
 }
 ```
