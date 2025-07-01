@@ -122,3 +122,32 @@ func printBinaryTree(root *TreeNode) {
 	fmt.Println("]")
 }
 ```
+
+## Matrix, 2D Array
+
+Parse 2D array:
+```go
+func parse2DArray(s string) [][]int {
+	s = s[1 : len(s)-1]
+	parts := strings.Split(s, "],[")
+	var res [][]int
+	for _, p := range parts {
+		p = strings.Trim(p, "[]")
+		ints := strings.Split(p, ",")
+		var cur []int
+		for _, i := range ints {
+			n, err := strconv.ParseInt(i, 10, 0)
+			if err != nil {
+				panic(err)
+			}
+			cur = append(cur, int(n))
+		}
+		res = append(res, cur)
+	}
+	return res
+}
+
+// no spaces in the provided string
+matrix := parse2DArray("[[1,2,3],[4,5,6]]")
+// matrix = [][]int{{1, 2, 3}, {4, 5, 6}}
+```
