@@ -1,0 +1,769 @@
+---
+layout: none
+permalink: /tenderheart/
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fart Button</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #8b4513;
+                font-family: "Arial", sans-serif;
+                position: relative;
+            }
+
+            body::before {
+                content: "";
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: clamp(300px, 40vw, 500px);
+                height: clamp(300px, 40vw, 500px);
+                background: #ffffff;
+                border-radius: 50%;
+                z-index: -1;
+                pointer-events: none;
+            }
+
+            body::after {
+                content: "❤️";
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: clamp(120px, 20vw, 200px);
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            #gameContainer {
+                width: 100%;
+                height: 100vh;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .japanese-char {
+                position: absolute;
+                font-size: clamp(24px, 5vw, 60px);
+                font-weight: bold;
+                color: #8b4513;
+                background: linear-gradient(145deg, #ffffff, #f5f5f5);
+                border: 3px solid #d2691e;
+                border-radius: 50%;
+                width: clamp(50px, 12vw, 80px);
+                height: clamp(50px, 12vw, 80px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 10px 30px rgba(139, 69, 19, 0.3);
+                transition: all 0.3s ease;
+                animation: float 6s ease-in-out infinite;
+                user-select: none;
+                z-index: 1;
+            }
+
+            .japanese-char:hover {
+                transform: scale(1.1);
+                box-shadow: 0 15px 40px rgba(139, 69, 19, 0.5);
+                background: linear-gradient(145deg, #f0f8ff, #e6e6fa);
+                border-color: #8b4513;
+            }
+
+            .japanese-char.clicked {
+                background: linear-gradient(145deg, #ffb6c1, #ffc0cb);
+                border-color: #dc143c;
+                color: #dc143c;
+                animation: bounce 0.5s ease;
+            }
+
+            .japanese-char.wrong {
+                background: linear-gradient(145deg, #ffe4e1, #ffcccb);
+                border-color: #8b0000;
+                color: #8b0000;
+                animation: shake 0.5s ease;
+            }
+
+            @keyframes float {
+                0%,
+                100% {
+                    transform: translateY(0px);
+                }
+                50% {
+                    transform: translateY(-5px);
+                }
+            }
+
+            @keyframes bounce {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.3);
+                }
+            }
+
+            @keyframes shake {
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+                10%,
+                30%,
+                50%,
+                70%,
+                90% {
+                    transform: translateX(-8px) rotate(-1deg);
+                }
+                20%,
+                40%,
+                60%,
+                80% {
+                    transform: translateX(8px) rotate(1deg);
+                }
+            }
+
+            #progress {
+                position: fixed;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(139, 69, 19, 0.9);
+                color: #fff8dc;
+                padding: clamp(8px, 2vw, 15px) clamp(15px, 4vw, 30px);
+                border-radius: 25px;
+                font-size: clamp(12px, 3vw, 18px);
+                font-weight: bold;
+                z-index: 1000;
+                max-width: 90vw;
+                text-align: center;
+            }
+
+            #status {
+                position: fixed;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(139, 69, 19, 0.9);
+                color: #fff8dc;
+                padding: clamp(8px, 2vw, 10px) clamp(15px, 4vw, 20px);
+                border-radius: 15px;
+                font-size: clamp(12px, 3vw, 16px);
+                z-index: 1000;
+                min-height: 20px;
+                max-width: 90vw;
+                text-align: center;
+            }
+
+            /* Mobile specific styles */
+            @media (max-width: 768px) {
+                #gameContainer {
+                    padding: 10px;
+                }
+
+                .japanese-char {
+                    font-size: clamp(20px, 6vw, 32px);
+                    width: clamp(45px, 10vw, 60px);
+                    height: clamp(45px, 10vw, 60px);
+                }
+
+                #progress {
+                    top: 5px;
+                    font-size: clamp(10px, 3.5vw, 14px);
+                    padding: 6px 12px;
+                }
+
+                #status {
+                    bottom: 5px;
+                    font-size: clamp(10px, 3.5vw, 14px);
+                    padding: 6px 12px;
+                }
+            }
+
+            .fart-emoji {
+                position: absolute;
+                font-size: 30px;
+                pointer-events: none;
+                animation: float-away 1.5s ease-out forwards;
+            }
+
+            @keyframes float-away {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px) scale(1.5);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="gameContainer">
+            <div id="characters"></div>
+            <div id="progress">Find the correct sequence!</div>
+            <div id="status"></div>
+        </div>
+
+        <script>
+            // Incorporated fart.js v2.0.0 by Tel Smith
+            // Original: https://github.com/74656c/fart.js/
+
+            /**
+             * Here are the main fart sounds.
+             * fart name : fart file (minus extension)
+             */
+            var farts = {
+                toot: "fart1",
+                ripper: "fart2",
+                plop: "fart3",
+                squit: "fart4",
+                raspberry: "fart5",
+                squat: "fart6",
+                tuppence: "fart7",
+                liftoff: "fart8",
+                trumpet: "fart9",
+                fizzler: "fart10",
+                windy: "fart11",
+                eine: "fart12",
+                fartception: "fart13",
+                fartpoint1: "fart14",
+            };
+
+            /**
+             * This is the Fart constructor.
+             *
+             * @class Fart
+             * @constructor
+             *
+             * @param {Object} options Default Sound, Loop and Volume
+             */
+            function Fart(options) {
+                this.sound = this.default_sound;
+                this.fart_player = null;
+                this.preloaded_audio = {}; // Store preloaded audio elements
+                this.old_player = false;
+                this.options = this.fartxtend(
+                    {
+                        default_sound: farts.raspberry,
+                        loop: false,
+                        volume: 50, // 0 - 100
+                    },
+                    options,
+                );
+                this.init();
+            }
+            Fart.preloaded = false;
+
+            /**
+             *
+             * Mimic jQuery Extend. 			✓
+             * Change name for Fart-based LOL. 	✓
+             *
+             */
+            Fart.prototype.fartxtend = function (options, defaults) {
+                for (var key in defaults) {
+                    if (defaults.hasOwnProperty(key)) {
+                        options[key] = defaults[key];
+                    }
+                }
+                return options;
+            };
+
+            /**
+             * Init the player. Figure out if the old player should be loaded by checking if the audio element has the canPlayType() method
+             *
+             * @method init
+             */
+            Fart.prototype.init = function () {
+                this.fart_player = document.createElement("audio");
+                if (typeof this.fart_player.canPlayType == "undefined") {
+                    this.load_old_player();
+                } else {
+                    // Preload the toot sound immediately for zero latency
+                    this.preloadToot();
+                }
+                this.preload();
+            };
+
+            /**
+             * If the browser is too old to load an AUDIO element, its probably ie7/8
+             *
+             * @method load_old_player
+             */
+            Fart.prototype.load_old_player = function () {
+                document.body.innerHTML +=
+                    '<div style="display:none;"><object id="contentPlayer" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" width="100" height="100"><param name="volume" value="100%" /><param name="windowlessVideo" value="true"><param name="AnimationatStart" value="0" /><param name="autostart" value="1" /></object></div>';
+                this.fart_player = document.getElementById("contentPlayer");
+                this.fart_old_player = true;
+            };
+
+            /**
+             * Play the sound via the browser.
+             * If a valid $sound is passed, it will play, otherwise it will default to the defaut sound
+             *
+             * @method play
+             * @param {String} sound The name of the sound to play
+             * @param {Function} callback A callback for once the sound has ended
+             */
+            Fart.prototype.play = function (sound, callback) {
+                var fart = sound
+                    ? farts[sound]
+                        ? farts[sound]
+                        : sound
+                    : this.options.default_sound;
+                callback = callback || null;
+
+                if (!this.fart_old_player) {
+                    // Use preloaded audio if available for instant playback
+                    if (this.preloaded_audio[fart]) {
+                        var audio = this.preloaded_audio[fart];
+                        audio.currentTime = 0; // Reset to start
+                        audio.volume = this.options.volume / 100;
+                        audio.loop = this.options.loop;
+                        audio.play();
+
+                        if (callback) {
+                            audio.addEventListener("ended", callback, {
+                                once: true,
+                            });
+                        }
+                    } else {
+                        // Fallback to original method for non-preloaded sounds
+                        var ext = this.fart_player.canPlayType("audio/mp3")
+                            ? ".mp3"
+                            : ".wav";
+                        this.fart_player.setAttribute(
+                            "src",
+                            "https://raw.githubusercontent.com/74656c/fart.js/master/farts/" +
+                                fart +
+                                ext,
+                        );
+                        this.fart_player.loop = this.options.loop;
+                        this.fart_player.volume = this.options.volume / 100;
+                        this.fart_player.play();
+
+                        // Handle callback without jQuery
+                        if (callback) {
+                            this.fart_player.addEventListener(
+                                "ended",
+                                callback,
+                                {
+                                    once: true,
+                                },
+                            );
+                        }
+                    }
+                } else {
+                    this.fart_player.URL = "/farts/" + fart + ".mp3";
+                }
+            };
+
+            /**
+             * Stop the sound from playing
+             *
+             * @method stop
+             */
+            Fart.prototype.stop = function () {
+                this.fart_player.pause();
+            };
+
+            /**
+             * Remove the element from the DOM
+             *
+             * @method remove
+             */
+            Fart.prototype.remove = function () {
+                this.fart_player.remove();
+            };
+
+            /**
+             * Play a random fart from the list
+             *
+             * @method random
+             */
+            Fart.prototype.random = function () {
+                var keys = Object.keys(farts);
+                var fart = keys[(keys.length * Math.random()) << 0];
+                this.play(fart);
+            };
+
+            /**
+             * Preload just the toot sound for instant playback
+             *
+             * @method preloadToot
+             */
+            Fart.prototype.preloadToot = function () {
+                var ext = this.fart_player.canPlayType("audio/mp3")
+                    ? ".mp3"
+                    : ".wav";
+                var tootAudio = document.createElement("audio");
+                tootAudio.preload = "auto";
+                tootAudio.src =
+                    "https://raw.githubusercontent.com/74656c/fart.js/master/farts/fart1" +
+                    ext;
+
+                // Store the preloaded audio
+                this.preloaded_audio["fart1"] = tootAudio;
+
+                tootAudio.addEventListener("canplaythrough", function () {
+                    console.log("Toot sound preloaded successfully");
+                });
+
+                tootAudio.addEventListener("error", function () {
+                    console.log("Failed to preload toot sound");
+                });
+            };
+
+            /**
+             * Try and preload the sounds. This was useful when the sound files where on a remote server
+             *
+             * @method preload
+             */
+            Fart.prototype.preload = function () {
+                var fart_player = this.fart_player;
+                if (!this.fart_old_player && !Fart.preloaded) {
+                    for (f in farts) {
+                        var ext = fart_player.canPlayType("audio/mp3")
+                            ? ".mp3"
+                            : ".wav";
+                        fart_player.setAttribute(
+                            "src",
+                            "https://raw.githubusercontent.com/74656c/fart.js/master/farts/" +
+                                farts[f] +
+                                ext,
+                        );
+                        console.log("preload:", farts[f]);
+                    }
+                    Fart.preloaded = true;
+                }
+            };
+
+            // Initialize Fart instance with toot as default
+            var fartPlayer = new Fart({
+                default_sound: farts.toot,
+                volume: 80,
+                loop: false,
+            });
+
+            // Japanese game logic
+            class JapaneseCharacterGame {
+                constructor() {
+                    this.targetSequence = "おっぽここっぽこすってんてん".split(
+                        "",
+                    );
+                    this.currentSequence = [];
+                    this.characters = [];
+                    this.gameContainer = document.getElementById("characters");
+                    this.progressDiv = document.getElementById("progress");
+                    this.statusDiv = document.getElementById("status");
+                    this.swapInterval = null;
+                    this.init();
+                }
+
+                init() {
+                    // Clear any existing characters
+                    this.gameContainer.innerHTML = "";
+                    this.createCharacters();
+                    this.updateProgress();
+                    this.startPositionSwapping();
+                }
+
+                destroy() {
+                    // Clean up intervals and DOM elements
+                    if (this.swapInterval) {
+                        clearInterval(this.swapInterval);
+                        this.swapInterval = null;
+                    }
+                    this.gameContainer.innerHTML = "";
+                }
+
+                createCharacters() {
+                    // Create characters in random positions with collision avoidance
+                    const shuffledChars = [...this.targetSequence].sort(
+                        () => Math.random() - 0.5,
+                    );
+
+                    // Get viewport dimensions
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+
+                    // Calculate character size based on viewport
+                    const isMobile = viewportWidth <= 768;
+                    const charSize = isMobile
+                        ? Math.min(viewportWidth / 8, 60)
+                        : 80;
+                    const safeMargin = charSize / 2;
+
+                    // Available area for positioning
+                    const minX = safeMargin;
+                    const maxX = viewportWidth - charSize - safeMargin;
+                    const minY = 80; // Account for progress bar
+                    const maxY = viewportHeight - charSize - 80; // Account for status bar
+
+                    const usedPositions = [];
+
+                    shuffledChars.forEach((char, index) => {
+                        const charElement = document.createElement("div");
+                        charElement.className = "japanese-char";
+                        charElement.textContent = char;
+                        charElement.setAttribute("data-char", char);
+
+                        // Find random position that doesn't overlap
+                        let position = this.getRandomNonOverlappingPosition(
+                            minX,
+                            maxX,
+                            minY,
+                            maxY,
+                            charSize,
+                            usedPositions,
+                        );
+
+                        usedPositions.push(position);
+
+                        charElement.style.left = position.x + "px";
+                        charElement.style.top = position.y + "px";
+
+                        // Very subtle float animation
+                        charElement.style.animationDelay =
+                            Math.random() * 2 + "s";
+
+                        charElement.addEventListener("click", (e) =>
+                            this.onCharacterClick(e, char),
+                        );
+
+                        this.gameContainer.appendChild(charElement);
+                        this.characters.push(charElement);
+                    });
+                }
+
+                onCharacterClick(event, clickedChar) {
+                    const element = event.target;
+                    const expectedChar =
+                        this.targetSequence[this.currentSequence.length];
+
+                    if (clickedChar === expectedChar) {
+                        // Correct character
+                        this.currentSequence.push(clickedChar);
+                        element.classList.add("clicked");
+
+                        this.statusDiv.textContent = "正解！ (Correct!)";
+                        this.statusDiv.style.color = "#DC143C";
+
+                        if (
+                            this.currentSequence.length ===
+                            this.targetSequence.length
+                        ) {
+                            // Game completed!
+                            this.onGameComplete();
+                        } else {
+                            this.updateProgress();
+                        }
+                    } else {
+                        // Wrong character
+                        element.classList.add("wrong");
+                        setTimeout(
+                            () => element.classList.remove("wrong"),
+                            500,
+                        );
+
+                        this.statusDiv.textContent =
+                            "間違い！ (Wrong!) Try again...";
+                        this.statusDiv.style.color = "#8B0000";
+
+                        // Create new game after failure
+                        setTimeout(() => {
+                            startNewGame();
+                        }, 1000);
+                    }
+                }
+
+                updateProgress() {
+                    const progress = this.currentSequence.length;
+                    const total = this.targetSequence.length;
+                    this.progressDiv.innerHTML = `Progress: <span style="color: #DC143C;">${progress}</span>/${total} characters found`;
+                }
+
+                onGameComplete() {
+                    this.statusDiv.textContent =
+                        "完成！ (Complete!) Playing fart sound...";
+                    this.statusDiv.style.color = "#DC143C";
+
+                    // Stop position swapping during celebration
+                    this.stopPositionSwapping();
+
+                    // Play fart sound
+                    fartPlayer.play("toot");
+
+                    // Create celebration effect
+                    this.createCelebrationEffect();
+
+                    // Start new game after 3 seconds
+                    setTimeout(() => {
+                        startNewGame();
+                    }, 3000);
+                }
+
+                createCelebrationEffect() {
+                    const emojis = ["💨", "🌪️", "🎉", "✨"];
+
+                    for (let i = 0; i < 10; i++) {
+                        setTimeout(() => {
+                            const emoji = document.createElement("div");
+                            emoji.className = "fart-emoji";
+                            emoji.textContent =
+                                emojis[
+                                    Math.floor(Math.random() * emojis.length)
+                                ];
+                            emoji.style.left =
+                                Math.random() * window.innerWidth + "px";
+                            emoji.style.top =
+                                Math.random() * window.innerHeight + "px";
+                            emoji.style.fontSize = "40px";
+
+                            document.body.appendChild(emoji);
+
+                            setTimeout(() => emoji.remove(), 1500);
+                        }, i * 100);
+                    }
+                }
+
+                getRandomNonOverlappingPosition(
+                    minX,
+                    maxX,
+                    minY,
+                    maxY,
+                    charSize,
+                    usedPositions,
+                ) {
+                    let position;
+                    let overlapping;
+                    const radius = charSize / 2;
+
+                    do {
+                        // Generate random position
+                        position = {
+                            x: minX + Math.random() * (maxX - minX),
+                            y: minY + Math.random() * (maxY - minY),
+                        };
+
+                        // Check if this character's body overlaps with any previous character
+                        overlapping = false;
+                        for (const used of usedPositions) {
+                            const distance = Math.sqrt(
+                                Math.pow(position.x - used.x, 2) +
+                                    Math.pow(position.y - used.y, 2),
+                            );
+
+                            // Check if circles overlap (distance between centers < sum of radii)
+                            if (distance < radius * 2 + 10) {
+                                // 10px padding between characters
+                                overlapping = true;
+                                break;
+                            }
+                        }
+                    } while (overlapping);
+
+                    return {
+                        x: Math.round(position.x),
+                        y: Math.round(position.y),
+                    };
+                }
+
+                startPositionSwapping() {
+                    this.swapInterval = setInterval(() => {
+                        // 50% chance to swap positions
+                        if (Math.random() < 0.5) {
+                            this.swapRandomCharacterPositions();
+                        }
+                    }, 1000); // Every second
+                }
+
+                swapRandomCharacterPositions() {
+                    if (this.characters.length < 2) return;
+
+                    // Randomly choose two different characters
+                    const index1 = Math.floor(
+                        Math.random() * this.characters.length,
+                    );
+                    let index2;
+                    do {
+                        index2 = Math.floor(
+                            Math.random() * this.characters.length,
+                        );
+                    } while (index2 === index1);
+
+                    const char1 = this.characters[index1];
+                    const char2 = this.characters[index2];
+
+                    // Get current positions
+                    const pos1 = {
+                        x: parseFloat(char1.style.left),
+                        y: parseFloat(char1.style.top),
+                    };
+                    const pos2 = {
+                        x: parseFloat(char2.style.left),
+                        y: parseFloat(char2.style.top),
+                    };
+
+                    // Swap positions with smooth animation
+                    char1.style.transition = "all 0.8s ease-in-out";
+                    char2.style.transition = "all 0.8s ease-in-out";
+
+                    char1.style.left = pos2.x + "px";
+                    char1.style.top = pos2.y + "px";
+                    char2.style.left = pos1.x + "px";
+                    char2.style.top = pos1.y + "px";
+
+                    // Remove transition after animation completes
+                    setTimeout(() => {
+                        char1.style.transition = "";
+                        char2.style.transition = "";
+                    }, 800);
+                }
+
+                stopPositionSwapping() {
+                    if (this.swapInterval) {
+                        clearInterval(this.swapInterval);
+                        this.swapInterval = null;
+                    }
+                }
+            }
+
+            // Game instance
+            let currentGame = null;
+
+            function startNewGame() {
+                // Destroy existing game
+                if (currentGame) {
+                    currentGame.destroy();
+                }
+
+                // Create new game instance
+                currentGame = new JapaneseCharacterGame();
+            }
+
+            // Initialize first game
+            startNewGame();
+
+            // Handle window resize - start new game with new dimensions
+            window.addEventListener("resize", () => {
+                startNewGame();
+            });
+        </script>
+    </body>
+</html>
