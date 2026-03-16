@@ -1,5 +1,5 @@
 ---
-title: "Implementing a HashTable in Rust"
+title: "HashTable from Scratch and Benchmarking"
 date: 2025-03-18
 ---
 
@@ -8,10 +8,11 @@ date: 2025-03-18
 Recently, I wanted to revisit Rust, and while following along with the book _Crafting Interpreters_, I came across the chapter on implementing a Hash Table. I discovered many interesting details about Hash Table implementations, which inspired me to write this blog post. I will implement a Hash Table using Rust and conduct some possibly non-standard benchmarks.
 
 A Hash Table typically consists of two main components:
+
 1. A hash function
 2. A collision resolution strategy, commonly including:
-	a. Chaining
-	b. Linear probing
+   a. Chaining
+   b. Linear probing
 
 In our Hash Table, we will use ⁠String as the key type and a simple hash function called FNV-1a to compute the hash value. To avoid recalculating the hash value on each query, we will precompute and cache it within the key.
 
@@ -223,10 +224,11 @@ There are many more aspects to discuss regarding Hash Tables, such as comparing 
 最近我在重新学习 Rust，正好在阅读《Crafting Interpreters》这本书时实现解释器。在阅读 Hash Table 的实现章节时，发现 Hash Table 的实现中有许多有趣的小细节，因此写下了这篇博文，使用 Rust 实现一个 Hash Table，并进行一些可能不太标准的基准测试。
 
 Hash Table一般由两个部分组成:
+
 1. 哈希算法
 2. 碰撞解决算法，常见的包括：
-	a. 链表
-	b. 线性探测（linear probing）
+   a. 链表
+   b. 线性探测（linear probing）
 
 我们的 Hash Table 使用 String 作为键类型，采用一种足够简单的哈希算法，称为 FNV-1a，来计算其哈希值。为了避免每次查询时都重新计算哈希值，我们提前计算并将其缓存在键中。
 
