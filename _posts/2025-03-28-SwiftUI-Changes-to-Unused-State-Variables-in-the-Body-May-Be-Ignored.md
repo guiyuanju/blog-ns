@@ -1,5 +1,5 @@
 ---
-title: "SwiftUI: Changes to Unused State Variables in the Body May Be Ignored"
+title: "SwiftUI Ignores Unused State Variables"
 date: 2025-03-28
 ---
 
@@ -90,7 +90,7 @@ var body: some View {
 
 Now, everything works as intended!
 
-Alternatively, we can use another initializer for the sheet: [link](https://developer.apple.com/documentation/swiftui/view/sheet(item:ondismiss:content:))
+Alternatively, we can use another initializer for the sheet: [link](<https://developer.apple.com/documentation/swiftui/view/sheet(item:ondismiss:content:)>)
 
 ```swift
 struct ContentView: View {
