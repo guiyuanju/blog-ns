@@ -1,5 +1,5 @@
 ---
-title: "Something I Didn’t Expect About Default Parameters in Python"
+title: "Default Parameters in Python"
 data: 2025-06-20
 ---
 
