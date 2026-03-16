@@ -1,5 +1,5 @@
 ---
-title: "Leetcode 24: Swap Nodes in Pairs -- Iterative vs Recursive"
+title: Swap Nodes in Pairs -- Iterative vs Recursive"
 date: 2025-03-12
 tags:
   - leetcode
@@ -15,6 +15,7 @@ Input: head = [1,2,3,4]
 Output: [2,1,4,3]
 
 Iterative solution:
+
 ```go
 func swapPairs(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
@@ -40,6 +41,7 @@ func swapPairs(head *ListNode) *ListNode {
 ```
 
 Recursive solution:
+
 ```go
 func swapPairs(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
