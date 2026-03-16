@@ -1,5 +1,5 @@
 ---
-title: " Next Greater Element I -- Performance Boost with Less Branches & Monotonic Stack"
+title: "Improve Performance Greatly By Eliminating Branches"
 date: 2025-03-20
 ---
 
