@@ -1,6 +1,6 @@
 ---
 title: "Default Parameters in Python"
-data: 2025-06-20
+data: 2024-06-20
 ---
 
 Consider the following class:
