@@ -1,5 +1,5 @@
 ---
-title: Swap Nodes in Pairs -- Iterative vs Recursive"
+title: Swap Nodes in Pairs -- Iterative vs Recursive
 date: 2025-03-12
 tags:
   - leetcode
