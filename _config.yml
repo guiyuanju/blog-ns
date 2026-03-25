@@ -1,17 +1,41 @@
 # theme: minima
 remote_theme: riggraz/no-style-please
 title: Keien
-description: Programming, tech and thoughts💡
+# description: Programming, tech and thoughts💡
 github_username: guiyuanju
 github_repo: "blog-ns"
 baseurl: "/blog-ns"
+email: lasviceju@outlook.com
 
 # minima:
 #   social_links:
 #     x: lasvice
 #     github: guiyuanju
 
-use_math: true
-show_description: true
-show_image: true
-show_tags: true
+# use_math: true
+# show_description: true
+# show_image: true
+# show_tags: true
+
+theme_config:
+  appearance: "auto" # can be "light", "dark" or "auto"
+  back_home_text: ".." # customize text for homepage link in post layout
+  date_format: "%Y-%m-%d" # customize how date is formatted
+  show_description: false # show blog description in home page
+  lowercase_titles: true # show titles in lowercase in lists
+
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jektex
+
+jektex:
+  cache_dir: ".jektex-cache"
+  ignore: ["*.xml"]
+  silent: false
+  macros:
+    - ["\\Q", "\\mathbb{Q}"]
+    - ["\\C", "\\mathbb{C}"]
