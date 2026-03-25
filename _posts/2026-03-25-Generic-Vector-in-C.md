@@ -78,16 +78,16 @@ We are using a simple grow strategy here: if the vector is less than 8, we grow 
 Since we have a function to grow our vector, we can automatically call it when user pushes a new element to the vector, we need a custom macro for it, which checks if the length overflow the capacity, grow the vector, set value, and update vector metadata.
 
 ```c
-#define vadd(vector, value)                                                    \
-  do {                                                                         \
-    if ((vector) == NULL) {                                                    \
-      vector = vec_new(0, 4, sizeof(*vector));                                 \
-    }                                                                          \
-    if (vlen(vector) + 1 > vcap(vector)) {                                     \
-      vector = vec_grow(vector);                                               \
-    }                                                                          \
-    (vector)[vlen(vector)] = (value);                                          \
-    vheader(vector)->len++;                                                    \
+#define vadd(vector, value)                         \
+  do {                                              \
+    if ((vector) == NULL) {                         \
+      vector = vec_new(0, 4, sizeof(*vector));      \
+    }                                               \
+    if (vlen(vector) + 1 > vcap(vector)) {          \
+      vector = vec_grow(vector);                    \
+    }                                               \
+    (vector)[vlen(vector)] = (value);               \
+    vheader(vector)->len++;                         \
   } while (0)
 ```
 
