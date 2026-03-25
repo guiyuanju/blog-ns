@@ -1,21 +1,12 @@
 # theme: minima
 remote_theme: riggraz/no-style-please
 title: Keien
-# description: Programming, tech and thoughts💡
 github_username: guiyuanju
 github_repo: "blog-ns"
 baseurl: "/blog-ns"
 email: lasviceju@outlook.com
-
-# minima:
-#   social_links:
-#     x: lasvice
-#     github: guiyuanju
-
-# use_math: true
-# show_description: true
-# show_image: true
-# show_tags: true
+favicon: "logo.png"
+# description: Programming, tech and thoughts💡
 
 theme_config:
   appearance: "dark" # can be "light", "dark" or "auto"
@@ -39,3 +30,8 @@ jektex:
   macros:
     - ["\\Q", "\\mathbb{Q}"]
     - ["\\C", "\\mathbb{C}"]
+
+# use_math: true
+# show_description: true
+# show_image: true
+# show_tags: true
