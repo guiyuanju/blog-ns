@@ -2,6 +2,7 @@
 title: "Lambda Calculus Interpreter"
 date: 2023-02-22
 layout: post
+slug: lambda-calculus-interpreter
 ---
 
 A Lambda Calculus Interpreter written in Go compiled to WASM, see source on [Github](https://github.com/guiyuanju/lamb).

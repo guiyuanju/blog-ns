@@ -1,54 +1,70 @@
 // -------------- THEME SWITCHER -------------- //
 @mixin dark-appearance {
+
+  /* Images */
   img {
     filter: invert(1);
-
-    &.ioda { filter: invert(0); }
   }
 
-  .emoji { filter: invert(1); }
+  img.ioda {
+    filter: invert(0);
+  }
+
+  /* Emoji / embeds */
+  .emoji {
+    filter: invert(1);
+  }
 
   iframe {
     filter: invert(1);
+  }
+
+   a {
+    filter: invert(1);
+  }
+
+  /* Tables */
+  table, th, td {
+    border-color: white;
+  }
+
+  /* Code */
+  code {
+    color: black;
+    background: white;
+  }
+
+  /* Blockquote */
+  blockquote {
+    border-color: white;
   }
 }
 
 /* DARK MODE ONLY */
 body[a="dark"] {
-  .w {
-    filter: invert(1);
-    @include dark-appearance;
-  }
+  background: black;
+  color: white;
+
+  @include dark-appearance;
 }
 
 /* AUTO MODE */
 @media (prefers-color-scheme: dark) {
   body[a="auto"] {
-    .w {
-      filter: invert(1);
-      @include dark-appearance;
-    }
+    background: black;
+    color: white;
+
+    @include dark-appearance;
   }
 }
 // -------------------------------------------- //
 
 
-// --- ROOT BACKGROUND (Safari fix) ---
+// --- ROOT BACKGROUND ---
 html {
-  background: white;   /* default light */
+  background: white;
   height: 100%;
   scroll-behavior: smooth;
-}
-
-/* switch root background in dark mode */
-body[a="dark"] {
-  background: black;
-}
-
-@media (prefers-color-scheme: dark) {
-  body[a="auto"] {
-    background: black;
-  }
 }
 
 
@@ -61,6 +77,20 @@ body {
   font-size: 16px;
   line-height: 1.4;
   overflow-wrap: break-word;
+}
+
+
+/* --- LINKS (light mode) --- */
+a {
+  color: blue;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: darkblue;
 }
 
 
@@ -90,14 +120,16 @@ hr {
   margin: 2rem 0;
   text-align: center;
   border: 0;
-
-  &:before { content: '/////' }
-  &:after { content: attr(data-content) '/////' }
 }
+
+hr:before { content: '/////' }
+hr:after { content: attr(data-content) '/////' }
 
 
 // --- TABLE ---
-table { width: 100%; }
+table {
+  width: 100%;
+}
 
 table, th, td {
   border: thin solid black;
@@ -125,8 +157,10 @@ blockquote {
   font-style: italic;
   border: thin solid black;
   padding: 1rem;
+}
 
-  p { margin: 0; }
+blockquote p {
+  margin: 0;
 }
 
 
