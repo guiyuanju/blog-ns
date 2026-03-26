@@ -1,6 +1,7 @@
 ---
 title: "Expression Problem"
 date: 2023-02-22
+layout: post
 ---
 
 OOP (Object-Oriented Programming) and FP (Functional Programming) are two prominent programming paradigms today, each offering distinct advantages and facing unique challenges. A classical example illustrating their differences is the expression problem.
@@ -16,11 +17,11 @@ The **expression problem** is concerned with extensibility regarding operations 
 
 In an OOP language like Java, number is defined as an interface with methods for + and -. The int and float types are classes implementing this interface. Adding a new subtype, such as a complex class representing complex numbers, is straightforward. You simply create the new class and implement the necessary methods without altering the existing code for int and float, thus avoiding recompilation.
 
-However, adding a new operation, like * (multiply), becomes challenging. You must locate the code for int, float, and complex, add the * method, and recompile all affected classes. This process can be time-consuming and error-prone.
+However, adding a new operation, like _ (multiply), becomes challenging. You must locate the code for int, float, and complex, add the _ method, and recompile all affected classes. This process can be time-consuming and error-prone.
 
 **FP Perspective**
 
-In an FP language like Haskell, number is a user-defined union type with constructors for int and float. Operations like + and - are defined as functions using case structures to handle each type variant. Adding a new operation, such as *, is simple; you just define a new function without modifying the type definition.
+In an FP language like Haskell, number is a user-defined union type with constructors for int and float. Operations like + and - are defined as functions using case structures to handle each type variant. Adding a new operation, such as \*, is simple; you just define a new function without modifying the type definition.
 
 However, introducing a new type variant, like complex, requires modifying all functions defined on the number type, which can be cumbersome.
 
@@ -49,4 +50,5 @@ Notably, the **observer pattern** is a design pattern that shifts a program's fo
 In summary, while OOP and FP each have their strengths and weaknesses regarding extensibility, various techniques can help achieve a balance, allowing for both operations and types to be extended more easily.
 
 [^1]: [The Expression Problem in Wikipedia](https://en.wikipedia.org/wiki/Expression_problem)
+
 [^2]: [Object-Oriented Programming Versus Abstract Data Types](https://www.cs.utexas.edu/users/wcook/papers/OOPvsADT/CookOOPvsADT90.pdf)

@@ -1,6 +1,7 @@
 ---
 title: "Default Parameters in Python"
 data: 2024-06-20
+layout: post
 ---
 
 Consider the following class:

@@ -1,6 +1,7 @@
 ---
 title: "HashTable from Scratch and Benchmarking"
 date: 2025-08-18
+layout: post
 ---
 
 [Link for Code](https://github.com/guiyuanju/hash_table_in_rust)

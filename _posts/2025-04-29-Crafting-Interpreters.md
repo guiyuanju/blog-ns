@@ -1,6 +1,7 @@
 ---
 title: "Book Reading: Crafting Interpreters"
 data: 2024-04-29
+layout: post
 ---
 
 I’ve been reading [Crafting Interpreters](https://craftinginterpreters.com) on and off for a long time, and I finally finished it tonight—what a wonderful journey! I highly recommend it to anyone interested in learning how interpreters and compilers are implemented.

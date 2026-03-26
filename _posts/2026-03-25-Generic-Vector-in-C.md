@@ -1,6 +1,7 @@
 ---
 title: '"Generic" Vector in C From Scratch'
 date: 2026-02-02
+layout: post
 ---
 
 [github repo](https://github.com/guiyuanju/vector)

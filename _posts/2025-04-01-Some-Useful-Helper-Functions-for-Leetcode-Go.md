@@ -2,6 +2,7 @@
 title: "Some Useful Helper Functions in Go for Leetcode -- Linked List, Tree, Graph"
 data: 2025-04-01
 published: false
+layout: post
 ---
 
 ## Assertion
@@ -127,6 +128,7 @@ func printBinaryTree(root *TreeNode) {
 ## Matrix, 2D Array
 
 Parse 2D array:
+
 ```go
 func parse2DArray(s string) [][]int {
 	s = s[1 : len(s)-1]

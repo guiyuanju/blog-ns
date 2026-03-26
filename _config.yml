@@ -1,11 +1,9 @@
-remote_theme: riggraz/no-style-please
 title: Keien
 github_username: guiyuanju
 github_repo: "guiyuanju.github.io"
 baseurl: "/"
 email: lasviceju@outlook.com
 favicon: "logo.png"
-# description: Programming, tech and thoughts💡
 
 theme_config:
   appearance: "dark" # can be "light", "dark" or "auto"

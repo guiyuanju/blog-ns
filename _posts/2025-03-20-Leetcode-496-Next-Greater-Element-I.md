@@ -1,6 +1,7 @@
 ---
 title: "Improve Performance Greatly By Eliminating Branches"
 date: 2025-05-20
+layout: post
 ---
 
 ## Problem
