@@ -21,6 +21,12 @@ entries:
         url: https://github.com/guiyuanju/golisp
       - title: mossdb
         url: https://github.com/guiyuanju/mossdb
+      - title: lamb
+        url: https://github.com/guiyuanju/lamb
+      - title: nn
+        url: https://github.com/guiyuanju/lamb
+      - title: painting
+        url: https://github.com/guiyuanju/lamb
 
   - title: rss
     url: feed.xml
