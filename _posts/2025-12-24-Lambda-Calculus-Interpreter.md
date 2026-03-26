@@ -1,6 +1,6 @@
 ---
 title: "Lambda Calculus Interpreter"
-date: 2023-02-22
+date: 2025-12-24
 layout: post
 slug: lambda-calculus-interpreter
 ---
