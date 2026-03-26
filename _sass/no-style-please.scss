@@ -1,85 +1,112 @@
-// ---------- THEME ---------- //
-@mixin invert-content {
-  filter: invert(1);
+// -------------- THEME SWITCHER -------------- //
+@mixin dark-appearance {
+  img {
+    filter: invert(1);
 
-  img, iframe, .emoji {
+    &.ioda { filter: invert(0); }
+  }
+
+  .emoji { filter: invert(1); }
+
+  iframe {
     filter: invert(1);
   }
+}
 
-  img.ioda {
-    filter: invert(0);
+/* DARK MODE ONLY */
+body[a="dark"] {
+  .w {
+    filter: invert(1);
+    @include dark-appearance;
   }
 }
 
-/* Dark mode */
-body[a="dark"] .w {
-  @include invert-content;
-}
-
-/* Auto mode */
+/* AUTO MODE */
 @media (prefers-color-scheme: dark) {
-  body[a="auto"] .w {
-    @include invert-content;
+  body[a="auto"] {
+    .w {
+      filter: invert(1);
+      @include dark-appearance;
+    }
   }
 }
+// -------------------------------------------- //
 
-// ---------- ROOT / SAFARI FIX ---------- //
+
+// --- ROOT BACKGROUND (Safari fix) ---
 html {
+  background: white;   /* default light */
   height: 100%;
-  background: white; /* light default */
   scroll-behavior: smooth;
 }
 
-body {
-  margin: 0;
-  min-height: 100dvh; /* iOS fix */
-  background: white;
-  color: black;
-  font: 16px/1.4 monospace;
+/* switch root background in dark mode */
+body[a="dark"] {
+  background: black;
 }
 
-/* Dark background (prevents Safari white flash) */
-body[a="dark"],
 @media (prefers-color-scheme: dark) {
   body[a="auto"] {
     background: black;
   }
 }
 
-// ---------- LAYOUT ---------- //
+
+/* iOS viewport fix */
+body {
+  margin: 0;
+  min-height: 100dvh;
+  color: black;
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+
+// --- LAYOUT ---
 .w {
   max-width: 640px;
   margin: 0 auto;
   padding: 4rem 2rem;
+  background: transparent;
 }
 
-// ---------- TYPOGRAPHY ---------- //
-h2, h3, h4, h5, h6 { margin-top: 3rem; }
-p { margin: 1rem 0; }
-li { margin: 0.4rem 0; }
+
+// --- TYPOGRAPHY ---
 .post-meta { text-align: right; }
+
+h2, h3, h4, h5, h6 { margin-top: 3rem; }
+
+p { margin: 1rem 0; }
+
+li { margin: 0.4rem 0; }
+
 *:target { background: yellow; }
 
-// ---------- ELEMENTS ---------- //
+
+// --- HR ---
 hr {
   margin: 2rem 0;
-  border: 0;
   text-align: center;
+  border: 0;
 
   &:before { content: '/////' }
   &:after { content: attr(data-content) '/////' }
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
 
-  th, td {
-    border: thin solid black;
-    padding: 0.4rem;
-  }
+// --- TABLE ---
+table { width: 100%; }
+
+table, th, td {
+  border: thin solid black;
+  border-collapse: collapse;
+  padding: 0.4rem;
 }
 
+
+// --- CODE ---
 code {
   color: white;
   background: black;
@@ -87,21 +114,25 @@ code {
 
 div.highlighter-rouge code {
   display: block;
-  padding: 1rem;
   overflow-x: auto;
   white-space: pre-wrap;
+  padding: 1rem;
 }
 
+
+// --- BLOCKQUOTE ---
 blockquote {
+  font-style: italic;
   border: thin solid black;
   padding: 1rem;
-  font-style: italic;
 
   p { margin: 0; }
 }
 
+
+// --- IMAGES ---
 img {
-  display: block;
   max-width: 100%;
+  display: block;
   margin: 0 auto;
 }
