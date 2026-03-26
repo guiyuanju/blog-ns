@@ -12,6 +12,8 @@ theme_config:
   show_description: false # show blog description in home page
   lowercase_titles: true # show titles in lowercase in lists
 
+permalink: /:slug.html
+
 sass:
   style: compressed
 
