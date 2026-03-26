@@ -1,5 +1,5 @@
 ---
 ---
 
-@import "no-style-please";
-@import "bw";
+@use "no-style-please" as *;
+@use "bw" as *;
