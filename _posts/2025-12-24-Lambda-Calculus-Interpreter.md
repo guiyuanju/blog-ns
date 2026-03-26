@@ -41,99 +41,134 @@ Define number from 0 to 9, + - _ /, if, and, or, not, and Y combinator and then 
   </div>
 </details>
 
+<br/>
+
 <style>
-    .repl {
-        /* padding: 10px; */
-        font-family: monospace;
-        overflow-y: auto;
-        box-sizing: border-box;
-        height: 100vh;
-        font-size: 16px;
+/* Container fills available space */
+.repl {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 100%;
+    background: #0f0f0f;
+    color: #eaeaea;
+    font-family: monospace;
+    font-size: 14px;
+}
 
-        /* Hide scrollbar (cross-browser) */
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* IE/Edge */
-    }
+/* Scrollable output area */
+.repl-output {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: auto; 
+    padding: 12px;
+    white-space: pre; 
+    /* white-space: pre-wrap; */
+}
 
-    .repl::-webkit-scrollbar {
-        display: none;
-        /* Chrome, Safari */
-    }
+/* Each entry */
+.repl-entry {
+    margin-bottom: 10px;
+}
 
-    .repl-output {
-        font-family: monospace;
-        white-space: pre-line;
-        margin-bottom: 10px;
-        font-size: 16px;
-    }
+/* Input line fixed at bottom */
+.repl-input-line {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #333;
+    background: #111;
+    color: black;
+}
 
-    .repl-input-line {
-        font-family: monospace;
-        font-size: 16px;
-        display: flex;
-    }
+/* Prompt */
+.prompt {
+    margin-right: 8px;
+    color: white;
+}
 
-    .prompt {
-        font-family: monospace;
-        font-size: 16px;
-        margin-right: 10px;
-    }
-
-    #stdin {
-        background: transparent;
-        /* Make input background transparent */
-        border: none;
-        /* Remove default input border */
-        font-family: monospace;
-        font-size: 16px;
-        flex-grow: 1;
-        /* Input takes up remaining space */
-        outline: none;
-        /* Remove blue highlight on focus */
-    }
+/* Input field */
+#stdin {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+}
 </style>
-<div class="repl" id="repl">
-    <div class="repl-output" id="stdout">
-    </div>
+
+<div class="repl">
+    <div class="repl-output" id="stdout"></div>
+
     <div class="repl-input-line">
         <span class="prompt">λ</span>
-        <input type="text" id="stdin" autofocus>
+        <input type="text" id="stdin" autofocus />
     </div>
+
 </div>
 
 <script src="/assets/js/wasm_exec.js"></script>
 
 <script>
-    const go = new Go();
-    WebAssembly.instantiateStreaming(fetch("/assets/wasm/la.wasm"), go.importObject).then((result) => {
-        go.run(result.instance);
-    });
+const go = new Go();
 
-    let repl = document.getElementById("repl")
-    let stdin = document.getElementById("stdin")
-    let stdout = document.getElementById("stdout")
-    stdin.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-            e.preventDefault()
+WebAssembly.instantiateStreaming(
+    fetch("/assets/wasm/la.wasm"),
+    go.importObject
+).then((result) => {
+    go.run(result.instance);
+});
 
-            const input = stdin.value
-            const res = run(input)
+const stdin = document.getElementById("stdin");
+const stdout = document.getElementById("stdout");
 
-            const entry = document.createElement("div")
-            entry.innerHTML = `<span class="prompt">λ</span>${input}<br/><pre>${res}</pre>`
+/* Scroll to bottom */
+function scrollToBottom() {
+    stdout.scrollTop = stdout.scrollHeight;
+}
 
-            stdout.appendChild(entry)
+/* Append a REPL entry */
+function appendEntry(input, result) {
+    const entry = document.createElement("div");
+    entry.className = "repl-entry";
 
-            stdin.value = ""
+    const line = document.createElement("div");
+    line.innerHTML = `<span class="prompt">λ</span>${input}`;
 
-            const repl = document.querySelector(".repl")
-            repl.scrollTo({
-                top: repl.scrollHeight,
-                behavior: "smooth"
-            })
+    const output = document.createElement("div");
+    output.textContent = result.replace(/\n+$/, ""); // trim trailing newlines
+
+    entry.appendChild(line);
+    entry.appendChild(output);
+
+    stdout.appendChild(entry);
+}
+
+/* Handle input */
+stdin.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+
+        const input = stdin.value;
+        if (!input) return;
+
+        let result;
+        try {
+            result = run(input);
+        } catch (err) {
+            result = String(err);
         }
-    })
 
+        appendEntry(input, result);
+
+        stdin.value = "";
+        scrollToBottom();
+    }
+});
+
+/* Keep focus on input */
+// document.addEventListener("click", () => {
+//     stdin.focus();
+// });
 </script>
