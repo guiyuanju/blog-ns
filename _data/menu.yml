@@ -30,5 +30,13 @@ entries:
       - title: blockmepls
         url: https://github.com/guiyuanju/blockmepls
 
+  - title: tools
+    entries:
+      - title: nvim, emacs
+
+  - title: languages
+    entries:
+      - title: C, Rust, Go, Lisp-1
+
   - title: rss
     url: feed.xml
