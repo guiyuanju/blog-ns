@@ -10,7 +10,7 @@ entries:
       - title: github
         url: https://github.com/guiyuanju
 
-  - title: all-posts
+  - title: posts
     post_list:
       limit: 999
       show_more: false

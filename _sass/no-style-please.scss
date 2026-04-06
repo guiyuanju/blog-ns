@@ -21,6 +21,7 @@
 
   a {
     filter: invert(1);
+    text-decoration: none;
   }
 
   input {
@@ -87,6 +88,7 @@ body {
 /* --- LINKS (light mode) --- */
 a {
   color: blue;
+  text-decoration: none;
 }
 
 a:visited {
