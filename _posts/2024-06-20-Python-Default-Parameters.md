@@ -2,6 +2,7 @@
 title: "Default Parameters in Python"
 data: 2024-06-20
 layout: post
+tags: [python]
 ---
 
 Consider the following class:

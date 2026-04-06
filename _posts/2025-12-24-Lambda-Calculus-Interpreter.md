@@ -3,6 +3,7 @@ title: "Lambda Calculus Interpreter"
 date: 2025-12-24
 layout: post
 slug: lambda-calculus-interpreter
+tags: [go, compiler]
 ---
 
 A Lambda Calculus Interpreter written in Go compiled to WASM, see source on [Github](https://github.com/guiyuanju/lamb).

@@ -2,9 +2,7 @@
 title: Swap Nodes in Pairs -- Iterative vs Recursive
 date: 2025-03-12
 layout: post
-tags:
-  - leetcode
-  - linked_list
+tags: [go]
 ---
 
 [24. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)

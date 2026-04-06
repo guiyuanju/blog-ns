@@ -2,6 +2,7 @@
 title: '"Generic" Vector in C From Scratch'
 date: 2026-02-02
 layout: post
+tags: [c]
 ---
 
 [github repo](https://github.com/guiyuanju/vector)

@@ -1,7 +1,8 @@
 ---
-title: "HashTable from Scratch and Benchmarking"
+title: "HashTable in Rust from Scratch"
 date: 2025-08-18
 layout: post
+tags: [rust]
 ---
 
 [Link for Code](https://github.com/guiyuanju/hash_table_in_rust)

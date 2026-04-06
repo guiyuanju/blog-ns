@@ -4,15 +4,17 @@
 entries:
   - title: info
     entries:
-      - title: a learner, a builder, a programmer
+      - title: '"a learner, a builder, a programmer"'
       - title: github
         url: https://github.com/guiyuanju
+      - title: rss
+        url: feed.xml
 
-  - title: all posts
+  - title: all-posts
     post_list:
-      limit: 10
-      show_more: true
-      show_more_text: See archive...
+      limit: 999
+      show_more: false
+      show_more_text: archive
       show_more_url: archive.html
 
   - title: projects
@@ -30,10 +32,14 @@ entries:
       - title: blockmepls
         url: https://github.com/guiyuanju/blockmepls
 
-  - title: languages & tools
+  - title: languages
     entries:
-      - title: C, Rust, Go, Lisp-1
-      - title: nvim, emacs
+      - title: c
+      - title: rust
+      - title: go
+      - title: lisp
 
-  - title: rss
-    url: feed.xml
+  - title: tools
+    entries:
+      - title: nvim
+      - title: emacs
