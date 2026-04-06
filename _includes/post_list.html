@@ -26,9 +26,7 @@
     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     {% endif %}
     {% for tag in post.tags %}
-    <i>
-      <small>#{{tag}}</small>
-    </i>
+    #{{tag}}
     {% endfor %}
     )
   </li>

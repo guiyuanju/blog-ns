@@ -4,11 +4,11 @@
 entries:
   - title: info
     entries:
-      - title: '"a learner, a builder, a programmer"'
+      - title: ( roles learner builder programmer )
+      - title: ( languages c rust go lisp )
+      - title: ( tools emacs nvim )
       - title: github
         url: https://github.com/guiyuanju
-      - title: rss
-        url: feed.xml
 
   - title: all-posts
     post_list:
@@ -31,15 +31,3 @@ entries:
         url: https://github.com/guiyuanju/painting
       - title: blockmepls
         url: https://github.com/guiyuanju/blockmepls
-
-  - title: languages
-    entries:
-      - title: c
-      - title: rust
-      - title: go
-      - title: lisp
-
-  - title: tools
-    entries:
-      - title: nvim
-      - title: emacs
