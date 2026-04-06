@@ -27,6 +27,8 @@ entries:
         url: https://github.com/guiyuanju/nn
       - title: painting
         url: https://github.com/guiyuanju/painting
+      - title: blockmepls
+        url: https://github.com/guiyuanju/blockmepls
 
   - title: rss
     url: feed.xml
